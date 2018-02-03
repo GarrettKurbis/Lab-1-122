@@ -160,11 +160,60 @@ bool SequentialList::insert(DataType val, unsigned int index) //incomplete
 
 bool SequentialList::remove(unsigned int index)
 {
+    if (list == NULL) //check if the list is empty
+    {
+        cout << "Cannot insert value, list is empty";
+        return false;
+    }
+    else if(index > size||index >0) //check if index is valid
+    {
+        cout << "Cannot inser value, index is not valid";
+        return false;
+    }
+    else if(index = size) //checks to see if it is last in the list
+    {
+        delete(index);
+        return true;
+    }
+    else
+    {
+        delete(index);
+        int test = index + 1;
+        while(test<size) //remember size does not 
+        {
+            int testvalue = select(test);
+            test = test--;
+            replace(test, testvalue);
+            test = test++;
+        }
+        return true;
+    }
 }
 
 unsigned int SequentialList::search(DataType val) const
 {
-    
+    if (list == NULL) //check if the list is empty
+    {
+        cout << "list is empty";
+        return false;
+    }
+    else
+    {
+        int search = 0;
+        while(search<size) //remember size does not compensate for the 0 place in the array
+        {
+           int searchresults = select(search);
+           if( searchresults = val )
+           {
+               return true;
+           }
+           else
+           {
+               search = search++;
+           }
+        }
+        
+    }
 }
 
 SequentialList::DataType SequentialList::select(unsigned int index) const
